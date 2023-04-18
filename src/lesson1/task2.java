@@ -20,7 +20,7 @@ public class task2 {
 
         System.out.println(Arrays.toString(differenceElements(arr1, arr2)));
         System.out.println(Arrays.toString(differenceElements(arr1, arr3)));
-        System.out.println(Arrays.toString(differenceElements(arr3, null)));
+        //System.out.println(Arrays.toString(differenceElements(arr3, null)));
 
     }
 
@@ -37,6 +37,9 @@ public class task2 {
         int size = arr1.length;
         float []diffArr = new float[size];
         for (int i = 0; i < size; i++) {
+            if (arr1[i] == 0 || arr2[i] == 0){
+                throw new RuntimeException("Проверьте данные массива, делить на 0 нельзя!");
+            }
             diffArr[i] = (float) arr1[i] / (float) arr2[i];
         }
         return diffArr;
