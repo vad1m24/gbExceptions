@@ -10,16 +10,17 @@ public class UserPhone {
 
     public static long writingPhoneNumber() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите ваш номер телефона формата '375 ХХ ХХХ ХХ ХХ'");
-        String input = scanner.nextLine();
-        try {
-            checkingPhoneNumber(input);
-            return Long.parseLong(checkingPhoneNumber(input));
-        } catch (EmptinessException | InputNumberException | PhoneNumberException e) {
-            System.out.println(e);
-            writingPhoneNumber();
+
+        while (true) {
+            System.out.println("Введите ваш номер телефона формата '375 ХХ ХХХ ХХ ХХ'");
+            String input = scanner.nextLine();
+            try {
+                checkingPhoneNumber(input);
+                return Long.parseLong(checkingPhoneNumber(input));
+            } catch (EmptinessException | InputNumberException | PhoneNumberException e) {
+                System.out.println(e);
+            }
         }
-        return 0;
     }
 
     private static String  checkingPhoneNumber(String input) throws EmptinessException, InputNumberException, PhoneNumberException {
@@ -40,9 +41,9 @@ public class UserPhone {
     private static boolean checkingNumbers(String result) {
         for (int i = 0; i < result.length(); i++) {
             if(!Character.isDigit(result.charAt(i))){
-                    return false;
-                }
+                return false;
             }
+        }
         return true;
     }
 }

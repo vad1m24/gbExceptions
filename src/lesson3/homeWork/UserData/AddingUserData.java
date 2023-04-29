@@ -15,7 +15,6 @@ public class AddingUserData {
     public static void addingUserDataToFile() throws IOException {
 
         String[] arr = UserName.writingFullName();
-        assert arr != null;
         String surname = arr[0];
         String name = arr[1];
         String secondName = arr[2];
@@ -44,10 +43,11 @@ public class AddingUserData {
             }
 
         }
-        if (count > 0){
+        if (count > 0) {
             File file = new File(surname);
             FileWriter writer = new FileWriter(file);
             writer.write(text);
+            System.out.println("Пользователь успешно добавлен.");
             writer.close();
         }
         makingAdvice();
@@ -56,22 +56,24 @@ public class AddingUserData {
 
     private static void makingAdvice() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("""
-                Пользователь успешно добавлен.
-                Хотите ли вы добавить еще одного пользователя?
-                Да - 'Y', нет - 'N'.""");
-        String input = scanner.nextLine();
-        String answer = input.toUpperCase();
-        try {
-            checkingAnswerInput(answer);
-            if (answer.equals("Y")){
-                Main.startProgram();
-            } else{
-                System.out.println("До свидания.");
+
+        while (true) {
+            System.out.println("""
+                    Хотите ли вы добавить еще одного пользователя?
+                    Да - 'Y', нет - 'N'.""");
+            String input = scanner.nextLine();
+            String answer = input.toUpperCase();
+            try {
+                checkingAnswerInput(answer);
+                if (answer.equals("Y")) {
+                    Main.startProgram();
+                } else if (answer.equals("N")) {
+                    System.out.println("До свидания.");
+                    break;
+                }
+            } catch (InputNameException e) {
+                System.out.println(e + " Да - 'Y', нет - 'N'.");
             }
-        } catch (InputNameException e) {
-            System.out.println(e + " Да - 'Y', нет - 'N'.");
-            makingAdvice();
         }
     }
 

@@ -8,19 +8,20 @@ public class UserSex {
 
     public static String writingSex() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите ваш пол (F/M)");
-        String input = scanner.nextLine();
-        String sex = input.toUpperCase();
-        try {
-            checkingSexInput(sex);
-        } catch (InputNameException e) {
-            System.out.println(e + " M - мужчина, F - женщина.");
-            writingSex();
+
+        while (true) {
+            System.out.println("Введите ваш пол (F/M)");
+            String input = scanner.nextLine();
+            String sex = input.toUpperCase();
+            try {
+                return checkingSexInput(sex);
+            } catch (InputNameException e) {
+                System.out.println(e + " M - мужчина, F - женщина.");
+            }
         }
-        return sex;
     }
 
-    private static void checkingSexInput(String sex) throws InputNameException {
+    private static String checkingSexInput(String sex) throws InputNameException {
         String[] arr = sex.split("");
         if (arr.length > 1) {
             throw new InputNameException();
@@ -32,6 +33,6 @@ public class UserSex {
                 }
             }
         }
-
+        return arr[0];
     }
 }

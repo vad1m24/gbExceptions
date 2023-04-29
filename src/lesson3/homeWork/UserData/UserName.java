@@ -9,16 +9,17 @@ public class UserName {
 
     public static String[] writingFullName() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите ваши данные (1.Фамилия 2.Имя 3.Отчество) через пробел, " +
-                "без дополнительной пунктуации.");
-        String input = scanner.nextLine();
-        try {
-            return checkingFullness(input);
-        } catch (EmptinessException | CountElementsException | InputNameException e) {
-            System.out.println(e);
-            writingFullName();
+
+        while (true) {
+            System.out.println("Введите ваши данные (1.Фамилия 2.Имя 3.Отчество) через пробел, " +
+                    "без дополнительной пунктуации.");
+            String input = scanner.nextLine();
+            try {
+                return checkingFullness(input);
+            } catch (EmptinessException | CountElementsException | InputNameException e) {
+                System.out.println(e);
+            }
         }
-        return null;
     }
 
     private static String[] checkingFullness(String input) throws EmptinessException, CountElementsException, InputNameException {
@@ -48,8 +49,10 @@ public class UserName {
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
             if (!(c >= 'A' && c <= 'Z') && !(c >= 'a' && c <= 'z')) {
-                if (!((c == ' ') || (c == '-'))) {
-                    return false;
+                if (!(c >= 'А' && c <= 'Я') && !(c >= 'а' && c <= 'я')) {
+                    if (!((c == ' ') || (c == '-'))) {
+                        return false;
+                    }
                 }
             }
         }

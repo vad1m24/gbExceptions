@@ -16,18 +16,18 @@ public class UserBirthDate {
 
     public static String writingBirthDate() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите вашу дату рождения в формате 'ДД.ММ.ГГГГ'");
-        String input = scanner.nextLine();
-        try {
-            return changingDateFormat(input);
-        } catch (ParseException e) {
-            System.out.println("Проверьте вводимые данные, формат даты рождения только числами - 'ДД.ММ.ГГГГ'!");
-            writingBirthDate();
-        } catch (CountDatesException | MaxAgeException | ContDaysAndMonthException e) {
-            System.out.println(e);
-            writingBirthDate();
+
+        while (true) {
+            System.out.println("Введите вашу дату рождения в формате 'ДД.ММ.ГГГГ'");
+            String input = scanner.nextLine();
+            try {
+                return changingDateFormat(input);
+            } catch (ParseException e) {
+                System.out.println("Проверьте вводимые данные, формат даты рождения только числами - 'ДД.ММ.ГГГГ'!");
+            } catch (CountDatesException | MaxAgeException | ContDaysAndMonthException e) {
+                System.out.println(e);
+            }
         }
-        return null;
     }
 
     private static String changingDateFormat(String input) throws ParseException, CountDatesException, MaxAgeException, ContDaysAndMonthException {
